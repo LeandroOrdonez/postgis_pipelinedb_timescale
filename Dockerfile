@@ -7,7 +7,7 @@ RUN  dpkg-divert --local --rename --add /sbin/initctl
 
 RUN apt-get update; apt-get -y install gnupg2 wget ca-certificates rpl pwgen lsb-release
 
-# Using lsb_release to install the right postgresql version and prevent errors like: "The following packages have unmet dependencies"
+# Using lsb_release to install the correct version of postgresql and avoid errors like: "The following packages have unmet dependencies"
 RUN sh -c "echo 'deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main' >> /etc/apt/sources.list.d/pgdg.list"
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 
