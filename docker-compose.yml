@@ -1,0 +1,17 @@
+version: "3"
+services:
+
+  cot_cim_notebook:
+    image: gitlab.ilabt.imec.be:4567/lordezan/cot_cim_notebook:latest
+    ports:
+      - "8888:8888"
+    links:
+      - postgres
+
+  postgres:
+    image: gitlab.ilabt.imec.be:4567/lordezan/postgis_pipelinedb:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gisdb,cot_streams
