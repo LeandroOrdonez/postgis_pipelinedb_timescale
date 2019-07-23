@@ -105,11 +105,14 @@ fi
 # If no arguments passed to entrypoint, then run postgres by default
 if [[ $# -eq 0 ]];
 then
-	echo "Postgres initialisation process completed .... restarting in background"
+	echo "Postgres initialisation process completed .... restarting in foreground"
 
 	su - postgres -c "$SETVARS $POSTGRES -D $DATADIR -c config_file=$CONF &"
     sleep 5
     entry_point_sql
+    # fix to run the code to create the pipeline and timescale extensions and prevent docker container from exiting
+    kill_postgres
+    su - postgres -c "$SETVARS $POSTGRES -D $DATADIR -c config_file=$CONF"
 fi
 
 # If arguments passed, run postgres with these arguments
