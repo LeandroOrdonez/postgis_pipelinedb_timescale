@@ -52,7 +52,7 @@ RUN apt-get -y update && apt-get install -y curl \
 # Configuration
 # ---------------------------------------------------------------------------
 COPY create-pipelinedb.sql /docker-entrypoint-initdb.d/
-COPY configure-pipelinedb.sh /docker-entrypoint-initdb.d/
+#COPY configure-pipelinedb.sh /docker-entrypoint-initdb.d/
 #RUN chmod 0755 /docker-entrypoint-initdb.d/configure.sh
 
 # ---------------------------------------------------------------------------
@@ -73,7 +73,8 @@ RUN apt-get install -y timescaledb-postgresql-11
 #RUN timescaledb-tune --yes
 
 COPY create-timescaledb.sql /docker-entrypoint-initdb.d/
-COPY configure-timescaledb.sh /docker-entrypoint-initdb.d/
+#COPY configure-timescaledb.sh /docker-entrypoint-initdb.d/
+COPY configure-shared-libraries.sh /docker-entrypoint-initdb.d/
 
 #RUN service postgresql restart
 
