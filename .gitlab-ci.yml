@@ -13,7 +13,7 @@ stages:
   - Build & Push image
 
 docker build:
-  stage: Build image
+  stage: Build & Push image
   only:
     - master
   script:
